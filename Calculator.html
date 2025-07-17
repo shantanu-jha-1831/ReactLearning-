@@ -32,7 +32,7 @@
 
         .calculator {
             width: 100%;
-            max-width: 320px;
+            max-width: 350px;
             background-color: var(--secondary-color);
             border-radius: 15px;
             overflow: hidden;
@@ -71,7 +71,7 @@
 
         .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 5px;
             padding: 15px;
         }
@@ -104,7 +104,6 @@
         .equals {
             background-color: var(--primary-color);
             color: var(--secondary-color);
-            grid-column: span 4;
         }
 
         .clear {
@@ -144,32 +143,50 @@
             <div class="current-input">0</div>
         </div>
         <div class="buttons">
+            <button class="clear" onclick=" appendOperator('sin')">sin</button>
+            <button class="clear" onclick="appendOperator('cos')">cos</button>
+            <button class="delete" onclick="appendOperator('tan')">tan</button>
+            <button class="operator" onclick="appendNumber('rad')">rad</button>
+            <button class="operator" onclick="appendNumber('deg')">deg</button>
+
+            <button class="clear" onclick="appendOperator('log')">log</button>
+            <button class="clear" onclick="appendNumber('In &#40;')">In</button>
+            <button class="delete" onclick="appendNumber('&#40;')">(</button>
+            <button class="operator" onclick="appendNumber('&#41;')">)</button>
+            <button class="operator" onclick="appendNumber('inv')">inv</button>
+
+            <button class="clear" onclick="appendNumber('!')">!</button>
             <button class="clear" onclick="clearDisplay()">C</button>
             <button class="delete" onclick="deleteLastChar()">⌫</button>
             <button class="operator" onclick="appendOperator('%')">%</button>
             <button class="operator" onclick="appendOperator('/')">/</button>
             
+            <button class="clear" onclick="appendOperator('^')">^</button>
             <button onclick="appendNumber('7')">7</button>
             <button onclick="appendNumber('8')">8</button>
             <button onclick="appendNumber('9')">9</button>
             <button class="operator" onclick="appendOperator('*')">×</button>
-            
+
+            <button class="clear" onclick="appendNumber('√')">√</button>
             <button onclick="appendNumber('4')">4</button>
             <button onclick="appendNumber('5')">5</button>
             <button onclick="appendNumber('6')">6</button>
             <button class="operator" onclick="appendOperator('-')">-</button>
             
+            <button class="clear" onclick="appendNumber('3.1415')">π</button>
             <button onclick="appendNumber('1')">1</button>
             <button onclick="appendNumber('2')">2</button>
             <button onclick="appendNumber('3')">3</button>
             <button class="operator" onclick="appendOperator('+')">+</button>
             
+            <button onclick="appendNumber('2.7182')">e</button>
+            <button onclick="appendNumber('0')">00</button>
             <button onclick="appendNumber('0')">0</button>
             <button onclick="appendDecimal()">.</button>
             <button class="equals" onclick="calculate()">=</button>
         </div>
         <div class="footer">
-            Modern Calculator v1.0
+            Dynamic Calculator v1.0
         </div>
     </div>
 
@@ -246,6 +263,29 @@
                 case '%':
                     result = prev % current;
                     break;
+                case '^':
+                    result = Math.pow(prev, current);
+                    break;
+                case ("sin"): {
+                    r = Math.sin(current);
+                    result = Math.round(r * 1000)/1000;
+                    break;
+                }
+                case ("cos"): {
+                    r = Math.cos(current);
+                    result = Math.round(r * 1000)/1000;
+                    break;
+                }
+                case ("tan"): {
+                    r = Math.tan(current);
+                    result = Math.round(r * 1000)/1000;
+                    break;
+                }
+                case ("log"): {
+                    r = Math.log(current);
+                    result = Math.round(r * 1000)/1000;
+                    break;
+                }
                 default:
                     return;
             }
